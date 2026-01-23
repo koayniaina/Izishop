@@ -6,8 +6,7 @@ import { route } from 'ziggy-js';
 // Définir les menus comme des tableaux d'objets
 const mainLinks = [
   { name: 'Home', routeName: 'page.home' },
-  { name: 'Shop', routeName: 'page.home' },
-  { name: 'Page', routeName: 'page.home' },
+  { name: 'Product', routeName: 'page.home' },
   { name: 'Blog', routeName: 'page.home' },
 ];
 

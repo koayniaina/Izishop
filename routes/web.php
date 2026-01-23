@@ -1,16 +1,28 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
+Route::inertia('', 'Home')->name('page.home');
+Route::inertia('cart' , 'Cart')->name('page.cart');
+
+Route::middleware('guest')->group(function () {
+    Route::inertia('/login', 'Auth/Login')->name('page.login');
+    Route::inertia('/register', 'Auth/Register')->name('page.register');
+
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Auth (connecté)
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [AuthController::class, 'profile'])
+        ->name('page.profile');
 
-Route::inertia('' , 'Home');
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('auth.logout');
+});

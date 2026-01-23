@@ -11,6 +11,6 @@ export default {
 
 <template>
    <AppLayout>
-        Home
+       Cart
    </AppLayout>
 </template>

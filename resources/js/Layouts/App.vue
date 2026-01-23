@@ -1,7 +1,13 @@
+<script setup>
+import TopHeader from "../components/TopHeader.vue";
+</script>
+
 <template>
-    <header>
-        <nav>
-            
-        </nav>
-    </header>
+    <main>
+        <TopHeader />
+        <sction>
+            <slot />
+        </sction>
+    </main>
 </template>
+

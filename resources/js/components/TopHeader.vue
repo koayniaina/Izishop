@@ -23,7 +23,7 @@ import BottonHeader from './BottonHeader.vue';
         <div class="search">
           <input type="search" placeholder="Search product" />
           <button class="searchButton">
-            <Search :size="14" color="white" />
+            <Search :size="12" color="white" />
           </button>
         </div>
 
@@ -40,7 +40,7 @@ import BottonHeader from './BottonHeader.vue';
 <style scoped>
 
 main{
-    background-color: rgb(255, 178, 35);
+    background-color: #F5BE4B;
 }
 
 section{

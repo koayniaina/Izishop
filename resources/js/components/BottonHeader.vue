@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { TextAlignEnd } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
+import Drawer from './shadcn/Drawer.vue';
 
-// Définir les menus comme des tableaux d'objets
 const mainLinks = [
   { name: 'Home', routeName: 'page.home' },
   { name: 'Product', routeName: 'page.home' },
   { name: 'Blog', routeName: 'page.home' },
+    { name: 'About', routeName: 'page.home' },
 ];
 
 const secondaryLinks = [
   { name: 'Deal of the Day', routeName: 'page.home' },
   { name: 'Best Sellers', routeName: 'page.home' },
+   { name: 'Hot Deals', routeName: 'page.home' },
   { name: 'New Arrival', routeName: 'page.home' },
+
 ];
 </script>
 
@@ -22,11 +24,10 @@ const secondaryLinks = [
     <!-- Header -->
      <div class="section">
          <div class="flex items-center gap-2">
-             <TextAlignEnd :size="18"/>
+          <Drawer/>
            <span>Browser Category</span>
          </div>
 
-         <!-- Menu principal -->
          <nav class="NavLink flex gap-4 my-2">
            <span v-for="link in mainLinks" :key="link.name">
              <Link :href="route(link.routeName)">{{ link.name }}</Link>

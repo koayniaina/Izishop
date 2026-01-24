@@ -1,3 +1,23 @@
+<script setup>
+import { usePage, router } from '@inertiajs/vue3'
+import { route } from 'ziggy-js'
+
+const user = usePage().props.user
+
+const logout = () => {
+    router.post(route('auth.logout'))
+}
+</script>
+
 <template>
-    Eerrrr
+    <div class="p-6">
+        <h1 class="text-2xl font-bold mb-4">Profile</h1>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <button
+            class="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+            @click="logout"
+        >
+            Logout
+        </button>
+    </div>
 </template>

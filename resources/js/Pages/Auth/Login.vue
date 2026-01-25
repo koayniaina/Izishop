@@ -22,7 +22,7 @@ const submit = () => {
 <template>
 <AuthLayout>
     <div class="auth-card">
-       
+
         <div  class="text-center mb-2">
             <h2 class="title">Welcom back egain</h2>
             <p>It's your account</p>
@@ -72,27 +72,25 @@ const submit = () => {
 </template>
 
 <style scoped>
-/* Carte */
+
 .auth-card {
     width: 100%;
     max-width: 450px;
     margin: 4rem auto;
-    /* position: relative; */
 }
 
-.home{
-    position: absolute;
-}
-
-/* Titre */
+/* =========================
+   Titres
+========================= */
 .title {
     font-size: 1.25rem;
     font-weight: 700;
-    /* margin-bottom: .9rem; */
     color: #111827;
 }
 
-/* Champs */
+/* =========================
+   Champs
+========================= */
 .field {
     margin-bottom: 1rem;
 }
@@ -101,19 +99,20 @@ const submit = () => {
     display: flex;
     align-items: center;
     border: 1px solid #e5e7eb;
-    border-radius: 4px;
-    padding: 0.4rem 0.75rem;
-    /* background: #f9fafb; */
-    /* transition: border-color 0.3s, box-shadow 0.3s; */
+    border-radius: 6px;
+    padding: 0.45rem 0.75rem;
+    background: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-wrapper:hover {
     border-color: #F5BE4B;
-    box-shadow: 0 0 10px rgba(249,115,22,0.2);
+    box-shadow: 0 0 0 3px rgba(245, 190, 75, 0.25);
 }
 
-.text-sm {
-    color: #F5BE4B;
+.input-wrapper:focus-within {
+    border-color: #F5BE4B;
+    box-shadow: 0 0 0 3px rgba(245, 190, 75, 0.35);
 }
 
 .input-wrapper input {
@@ -122,27 +121,35 @@ const submit = () => {
     width: 100%;
     padding-left: 0.5rem;
     background: transparent;
+    font-size: 0.95rem;
+    color: #111827;
 }
 
+/* =========================
+   Icônes
+========================= */
 .icon {
     width: 20px;
     height: 20px;
     color: #9ca3af;
 }
 
-/* Bordure d’erreur */
+/* =========================
+   Erreurs
+========================= */
 .error-border {
     border-color: #da1111 !important;
 }
 
-/* Message d’erreur */
 .error-message {
     color: #da1111;
     font-size: 0.85rem;
-    /* margin-top: 0.25rem; */
+    margin-top: 0.25rem;
 }
 
-/* Flex pour Remember Me et Forgot Password */
+/* =========================
+   Layout utilitaire
+========================= */
 .flex {
     display: flex;
 }
@@ -155,22 +162,6 @@ const submit = () => {
     align-items: center;
 }
 
-.text-sm {
-    font-size: 0.875rem;
-}
-
-.text-gray-700 {
-    color: #374151;
-}
-
-.text-orange-500 {
-    color: #F5BE4B;
-}
-
-.hover\:underline:hover {
-    text-decoration: underline;
-}
-
 .gap-2 {
     gap: 0.5rem;
 }
@@ -179,22 +170,53 @@ const submit = () => {
     margin-bottom: 1rem;
 }
 
-/* Bouton */
+/* =========================
+   Textes
+========================= */
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-gray {
+    color: #374151;
+}
+
+.text-primary {
+    color: #F5BE4B;
+}
+
+.text-primary:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   Bouton
+========================= */
 .btn {
     width: 100%;
     background: #F5BE4B;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 4px;
+    color: #ffffff;
+    padding: 0.55rem;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
     font-weight: 700;
     font-size: 1rem;
-    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+    background: #e4aa35;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active:not(:disabled) {
+    transform: scale(0.97);
 }
 
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
 </style>

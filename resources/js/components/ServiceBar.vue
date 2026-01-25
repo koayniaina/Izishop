@@ -58,6 +58,7 @@ const services = [
 .services {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  margin:  2rem;
   background: #fff;
   border: 1px solid #eee;
 }
@@ -66,7 +67,7 @@ const services = [
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 20px;
+  padding: 1rem;
   border-right: 1px solid #eee;
 }
 

@@ -6,7 +6,7 @@ import { route } from 'ziggy-js';
 
 <template>
     <div>
-         <Link :href="route('page.home')" class="home">Go Back</Link>
+        <Link :href="route('page.home')" class="home">Go Back</Link>
     </div>
     <nav>
         <Link :href="route('page.login')">Login</Link>
@@ -23,7 +23,6 @@ import { route } from 'ziggy-js';
         padding: 1rem;
         justify-content: center;
         display: flex;
-        /* position: relative; */
         gap: 2rem;
         color: white;
         position: relative;
@@ -47,8 +46,11 @@ import { route } from 'ziggy-js';
     position: absolute;
     top: 56px;
     margin: 1rem;
-    padding: .2rem 1rem;
+    padding: .4rem 1rem;
+    font-size: .7rem;
+    color: white;
+    background-color: #000000;
     border-radius: 4px;
-    border: 1px solid #000000;
+    /* border: 1px solid #000000; */
 }
 </style>

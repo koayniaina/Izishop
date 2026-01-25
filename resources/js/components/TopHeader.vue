@@ -40,7 +40,7 @@ import BottonHeader from './BottonHeader.vue';
 <style scoped>
 
 main{
-    background-color: #F5BE4B;
+    background-color: #f5b400;
 }
 
 section{

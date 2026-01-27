@@ -1,100 +1,141 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import {
   Box,
-  Hammer,
+  Zap,
   Shield,
-  Sofa
-} from 'lucide-vue-next' // Lucide icons
+  Droplet,
+  SprayCan,
+  Sofa,
+  Leaf,
+  Home,
+  HardHat,
+  Toolbox
+} from 'lucide-vue-next'
 
-// Each category now has an icon instead of an image
+// Toutes les catégories
 const categories = [
-  { name: "Materials", slug: "materials", icon: Box },
-  { name: "Equipment & Tools", slug: "equipment", icon: Hammer }, // changed Tool → Hammer
-  { name: "Safety Equipment", slug: "safety", icon: Shield },
-  { name: "Furniture & Management", slug: "furniture", icon: Sofa }
+  { name: "Flooring", slug: "flooring", icon: Box },
+  { name: "Electrical ", slug: "electrical", icon: Zap },
+  { name: "Hardware ", slug: "hardware", icon: Shield },
+  { name: "Plumbing", slug: "plumbing", icon: Droplet },
+  { name: "Paints", slug: "paint", icon: SprayCan },
+  { name: "Furniture", slug: "furniture", icon: Sofa },
+  { name: "Gardening", slug: "gardening", icon: Leaf },
+  { name: "Roofing", slug: "roofing", icon: Home },
+  { name: "Construction", slug: "machinery", icon: HardHat },
+  { name: "DIY", slug: "diy", icon: Toolbox },
 ]
+
+// Ref du conteneur scrollable
+const scrollContainer = ref<HTMLElement | null>(null)
+
+// Fonction pour scroll à gauche
+const scrollLeft = () => {
+  if (scrollContainer.value) {
+    scrollContainer.value.scrollBy({ left: -800, behavior: 'smooth' })
+  }
+}
+
+// Fonction pour scroll à droite
+const scrollRight = () => {
+  if (scrollContainer.value) {
+    scrollContainer.value.scrollBy({ left: 800, behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
-  <div class="category">
+  <div class="category-carousel">
     <h2>Shop By Category</h2>
 
-    <div class="category-grid">
-      <Link
-        v-for="cat in categories"
-        :key="cat.slug"
-        :href="`/category/${cat.slug}`"
-        class="category-card"
+    <div class="relative  slider">
+      <!-- Bouton gauche -->
+      <button
+        @click="scrollLeft"
+        class="absolute top-1/2 left-0 -translate-y-1/2 bg-white shadow rounded-full p-2 cursor-pointer z-10"
       >
-        <!-- Icon goes here -->
-        <div class="icon-wrapper">
-          <component :is="cat.icon" class="category-icon" />
-        </div>
+        &lt;
+      </button>
 
-        <!-- Category name -->
-        <p>{{ cat.name }}</p>
-      </Link>
+      <!-- Contenu scrollable -->
+      <div
+        ref="scrollContainer"
+        class="flex gap-4 overflow-x-auto px-2 scrollbar-hide scroll-smooth py-2"
+      >
+        <Link
+          v-for="cat in categories"
+          :key="cat.slug"
+          :href="`/category/${cat.slug}`"
+          class="category-card flex-shrink-0 w-40 sm:w-32 md:w-36 "
+        >
+          <div class="icon-wrapper">
+            <component :is="cat.icon" class="category-icon" />
+          </div>
+          <p>{{ cat.name }}</p>
+        </Link>
+      </div>
+
+      <!-- Bouton droit -->
+      <button
+        @click="scrollRight"
+        class="absolute top-1/2 right-0 -translate-y-1/2 bg-white shadow rounded-full p-2 cursor-pointer z-10 hover:bg-gray-100"
+      >
+        &gt;
+      </button>
     </div>
   </div>
 </template>
 
 <style scoped>
-
-.category h2 {
-  color: #000000;
+.category-carousel h2 {
   text-align: center;
-  position: relative;
   font-weight: 600;
   text-transform: uppercase;
+  color: #000;
+  margin: 1rem 0;
+  /* margin-bottom: 2rem; */
   font-size: 1rem;
-  margin: 2rem 0;
+  position: relative;
 }
 
-.category h2::before{
-    content: "";
-    top: 23px;
-    width: 100px;
-    margin: 0 2rem;
-    /* display: flex; */
-    /* justify-content: center; */
-    height: 2px;
-    background-color: #f5b400;
-    position: absolute;
+.slider{
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
 }
 
-
-
-/* Grid layout */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 2rem;
-  justify-items: center;
-  padding: 0 1rem;
+.category-carousel h2::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: #f5b400;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
 }
-
-/* Card style */
+/*
 .category-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit , minmax(140px , 1fr));
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
+  transition: transform 0.3s;
+} */
 
-
-/* Icon wrapper (where icon is placed) */
 .icon-wrapper {
-  width: 100px;
-  height: 100px;
+  /* width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: #f0f0f0;
+  background: #f0f0f0; */
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 0.8rem;
+  align-items: center;
+  /* margin-bottom: 0.8rem; */
   transition: transform 0.3s;
 }
 
@@ -102,18 +143,31 @@ const categories = [
   transform: scale(1.1);
 }
 
-/* Icon style */
 .category-icon {
   width: 30px;
   height: 30px;
   color: #333;
 }
 
-/* Text */
 .category-card p {
   font-weight: 500;
-  font-size: 1rem;
-  color: #333;
+  font-size: 0.7rem;
+  margin-top: .3rem;
   text-align: center;
+  color: #333;
+}
+
+/* Scroll smooth */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Masquer scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

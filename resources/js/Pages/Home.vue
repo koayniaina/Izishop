@@ -22,7 +22,7 @@ const props = defineProps<{
   <AppLayout>
     <HeroBanner />
     <Category/>
-    <Posts :posts="props.posts"/>
+    <!-- <Posts :posts="props.posts"/> -->
     <ServiceBar />
   </AppLayout>
 </template>

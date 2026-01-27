@@ -70,7 +70,7 @@
                 </div>
                 <div class="contact-item">
                     <Mail :size="18"/>
-                    <span>info@apexconstruction.com</span>
+                    <span>info@izzishop.com</span>
                 </div>
                 <div class="contact-item">
                     <Phone :size="18"/>

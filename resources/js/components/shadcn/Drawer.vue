@@ -20,41 +20,97 @@ import { TextAlignEnd, X } from 'lucide-vue-next'
 
 const categories = [
   {
-    name: 'Construction Materials',
+    name: 'Flooring & Surfaces',
     subcategories: [
       { name: 'Wood', types: ['Oak', 'Pine', 'Teak', 'Meranti'] },
-      { name: 'Cement', types: ['Portland', 'White', 'Fast', 'Grey'] },
-      { name: 'Bricks', types: ['Red', 'White', 'Fireproof', 'Silico-calcareous'] },
-      { name: 'Metal', types: ['Steel', 'Aluminium', 'Iron', 'Copper'] },
+      { name: 'Tiles', types: ['Ceramic', 'Porcelain', 'Mosaic', 'Stoneware'] },
+      { name: 'Cement & Concrete', types: ['Portland', 'White', 'Quick Set', 'Grey'] },
+      { name: 'Metal Sheets', types: ['Steel', 'Aluminium', 'Copper', 'Iron'] },
     ],
   },
   {
-    name: 'Equipment & Tools',
+    name: 'Electrical & Lighting',
     subcategories: [
       { name: 'Power Tools', types: ['Drill', 'Circular Saw', 'Grinder'] },
-      { name: 'Hand Tools', types: ['Hammer', 'Screwdriver', 'Wrench'] },
-      { name: 'Construction Equipment', types: ['Scaffold', 'Wheelbarrow', 'Tarps'] },
+      { name: 'Hand Tools', types: ['Hammer', 'Screwdriver', 'Wrench', 'Pliers'] },
+      { name: 'Electrical Supplies', types: ['Wires', 'Switches', 'Sockets', 'Circuit Breakers'] },
+      { name: 'Lighting', types: ['LED', 'Pendant', 'Wall Lamp', 'Ceiling Light'] },
     ],
   },
   {
-    name: 'Safety Equipment',
+    name: 'Hardware & Safety',
     subcategories: [
       { name: 'Helmets', types: ['Construction', 'Electrical', 'Chemical'] },
       { name: 'Gloves', types: ['Leather', 'Latex', 'Cut-resistant'] },
-      { name: 'Goggles', types: ['UV Protection', 'Chemical', 'Welding'] },
-      { name: 'Safety Shoes', types: ['Steel', 'Composite', 'PVC'] },
+      { name: 'Safety Glasses', types: ['UV Protection', 'Chemical', 'Welding'] },
+      { name: 'Safety Shoes', types: ['Steel Toe', 'Composite', 'PVC'] },
+      { name: 'Locks & Hinges', types: ['Padlock', 'Door Hinges', 'Cabinet Locks'] },
+      { name: 'Fasteners', types: ['Nails', 'Screws', 'Bolts', 'Rivets'] },
+    ],
+  },
+  {
+    name: 'Plumbing & Sanitary',
+    subcategories: [
+      { name: 'Pipes', types: ['PVC', 'Copper', 'Galvanized', 'PEX'] },
+      { name: 'Fittings', types: ['Elbows', 'T-Joints', 'Adapters', 'Couplers'] },
+      { name: 'Sanitary Fixtures', types: ['Toilet', 'Sink', 'Shower', 'Bathtub'] },
+      { name: 'Valves', types: ['Gate Valve', 'Ball Valve', 'Check Valve'] },
+    ],
+  },
+  {
+    name: 'Paints, Adhesives & Sealants',
+    subcategories: [
+      { name: 'Paints', types: ['Acrylic', 'Alkyd', 'Epoxy', 'Latex'] },
+      { name: 'Primers', types: ['Wood Primer', 'Concrete Primer'] },
+      { name: 'Adhesives', types: ['Construction Glue', 'Epoxy Glue', 'Tile Adhesive'] },
+      { name: 'Sealants', types: ['Silicone', 'Polyurethane', 'Acrylic'] },
     ],
   },
   {
     name: 'Furniture & Interior',
     subcategories: [
-      { name: 'Furniture', types: ['Table', 'Chair', 'Wardrobe'] },
-      { name: 'Flooring', types: ['Parquet', 'Vinyl', 'Carpet'] },
-      { name: 'Tiles', types: ['Stoneware', 'Ceramic', 'Mosaic'] },
-      { name: 'Paint', types: ['Acrylic', 'Alkyd', 'Epoxy'] },
+      { name: 'Furniture', types: ['Sofa', 'Chair', 'Wardrobe', 'Table'] },
+      { name: 'Floor Coverings', types: ['Carpet', 'Rugs', 'Vinyl', 'Parquet'] },
+      { name: 'Decor Items', types: ['Vases', 'Wall Art', 'Curtains'] },
+      { name: 'Lighting', types: ['Table Lamp', 'Ceiling Light', 'Wall Lamp'] },
+    ],
+  },
+  {
+    name: 'Gardening & Landscaping',
+    subcategories: [
+      { name: 'Garden Tools', types: ['Shovel', 'Rake', 'Pruner', 'Hoe'] },
+      { name: 'Outdoor Furniture', types: ['Table', 'Chair', 'Bench'] },
+      { name: 'Plants & Seeds', types: ['Flowers', 'Vegetables', 'Herbs', 'Saplings'] },
+      { name: 'Irrigation', types: ['Hoses', 'Sprinklers', 'Drip Systems'] },
+    ],
+  },
+  {
+    name: 'Roofing & Waterproofing',
+    subcategories: [
+      { name: 'Roofing Sheets', types: ['Metal', 'Asphalt Shingles', 'Clay Tiles'] },
+      { name: 'Insulation', types: ['Thermal', 'Acoustic', 'Waterproof'] },
+      { name: 'Sealants', types: ['Silicone', 'Polyurethane', 'Bitumen'] },
+      { name: 'Gutters & Downpipes', types: ['PVC', 'Metal'] },
+    ],
+  },
+  {
+    name: 'Construction Machinery',
+    subcategories: [
+      { name: 'Heavy Machinery', types: ['Excavator', 'Bulldozer', 'Crane'] },
+      { name: 'Concrete Equipment', types: ['Mixer', 'Pump', 'Vibrator'] },
+      { name: 'Site Equipment', types: ['Scaffolding', 'Wheelbarrow', 'Ladders'] },
+    ],
+  },
+  {
+    name: 'DIY & Miscellaneous',
+    subcategories: [
+      { name: 'Handy Materials', types: ['Glue', 'Tape', 'Nails', 'Screws'] },
+      { name: 'Storage', types: ['Shelves', 'Boxes', 'Cabinets'] },
+      { name: 'Cleaning Tools', types: ['Broom', 'Mop', 'Vacuum'] },
     ],
   },
 ]
+
 </script>
 
 <template>

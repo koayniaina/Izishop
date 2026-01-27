@@ -3,11 +3,13 @@
         <!-- Newsletter -->
         <div class="newsletter">
             <div class="newsletter-content">
-                <Newspaper :size="40" :style="black"/>
+                <Newspaper :size="40" color="#000" />
                 <div class="newsletter-text">
                     <h3>Construction Newsletter</h3>
                     <p>
-                       Receive updates on construction projects, building techniques, safety standards, and industry innovations from our experts.
+                        Receive updates on construction projects, building
+                        techniques, safety standards, and industry innovations
+                        from our experts.
                     </p>
                 </div>
 
@@ -29,8 +31,8 @@
             <div class="footer-col">
                 <h2 class="logo">IZZISHOP CONSTRUCTION</h2>
                 <p>
-                    Izzishop Construction provides reliable building solutions from
-                    foundation to finishing, with a strong commitment to
+                    Izzishop Construction provides reliable building solutions
+                    from foundation to finishing, with a strong commitment to
                     quality, safety, and on-time delivery.
                 </p>
             </div>
@@ -62,9 +64,18 @@
             <!-- Contact Info -->
             <div class="footer-col">
                 <h4>Contact Information</h4>
-                <p>📍 Antananarivo, Madagascar</p>
-                <p>📧 info@apexconstruction.com</p>
-                <p>📞 +261 34 12 345 67</p>
+                <div class="contact-item">
+                    <MapPin :size="18"/>
+                    <span>Antananarivo, Madagascar</span>
+                </div>
+                <div class="contact-item">
+                    <Mail :size="18"/>
+                    <span>info@apexconstruction.com</span>
+                </div>
+                <div class="contact-item">
+                    <Phone :size="18"/>
+                    <span>+262 555 123 096</span>
+                </div>
             </div>
         </div>
 
@@ -76,12 +87,13 @@
 </template>
 
 <script setup>
-import { Newspaper } from "lucide-vue-next";
+import { Mail, MapPin, Newspaper, Phone } from "lucide-vue-next";
 import { ref } from "vue";
 
 const email = ref("");
 
 const subscribe = () => {
+    if (!email.value) return;
     alert(`Subscription successful: ${email.value}`);
     email.value = "";
 };
@@ -94,20 +106,15 @@ const subscribe = () => {
     /* font-family: Arial, sans-serif; */
 }
 
-.icon{
-    color: #000;
-}
 /* ================= NEWSLETTER ================= */
 .newsletter {
     background: #f5b400;
-    padding:2rem;
+    padding: 2rem;
 }
 
 .newsletter-content {
-    /* max-width: 1100px; */
     margin: auto;
     display: flex;
-    /* padding: 0 0 1rem; */
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
@@ -134,34 +141,39 @@ const subscribe = () => {
 .newsletter-form {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 5px;
 }
 
 .newsletter-form input {
     padding: 9px;
-    border: none;
+    border: 1px solid #ccc;
     outline: none;
     color: #000;
     background-color: #fff;
-    border: 1px solid rgb(255, 255, 255);
     width: 440px;
     max-width: 100%;
+    border-radius: 3px 0 0 3px;
 }
 
 .newsletter-form button {
     background: #000;
     color: #fff;
-    padding: 10px ;
+    padding: 10px 15px;
     cursor: pointer;
-    /* transition: background 0.3s; */
+    border: none;
+    border-radius: 0 3px 3px 0;
+    transition: background 0.3s;
+}
+
+.newsletter-form button:hover {
+    background: #222;
 }
 
 /* ================= FOOTER CONTENT ================= */
 .footer-content {
     max-width: 1100px;
-    margin:2rem auto;
-    padding:9px 1rem ;
-
+    margin: 2rem auto;
+    padding: 0 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
@@ -184,6 +196,18 @@ const subscribe = () => {
 
 .footer-col ul li {
     margin-bottom: 10px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espace entre l'icône et le texte */
+  margin-bottom: 10px;
+  color: #cccccc;
+}
+
+.contact-item svg {
+  flex-shrink: 0; /* empêche l'icône de rétrécir */
+  color: #f5b400; /* couleur des icônes */
 }
 
 .footer-col ul li a {
@@ -225,7 +249,13 @@ const subscribe = () => {
     .newsletter-form input {
         width: 100%;
         max-width: 300px;
+        border-radius: 3px;
+        margin-bottom: 10px;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        border-radius: 3px;
     }
 }
-
 </style>

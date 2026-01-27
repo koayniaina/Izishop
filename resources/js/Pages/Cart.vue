@@ -66,45 +66,70 @@
 </template>
 
 <script setup>
-import { Trash } from "lucide-vue-next";
-import AppLayout from "../Layouts/App.vue";
 import { ref, computed } from "vue";
+import AppLayout from "../Layouts/App.vue";
+import { Trash } from "lucide-vue-next";
 
 const cart = ref([
-    {
-        id: 1,
-        brand: "Marni",
-        name: "Blue Trunk Bag",
-        color: "Blue",
-        size: "One Size",
-        price: 2160,
-        quantity: 1,
-        shipping: 15,
-    },
-    {
-        id: 2,
-        brand: "Common Projects",
-        name: "Achilles Retro Low",
-        color: "White",
-        size: "IT 36",
-        price: 485,
-        quantity: 1,
-        shipping: 0,
-    },
+  {
+    id: 1,
+    brand: "Marni",
+    name: "Blue Trunk Bag",
+    price: 2160,
+    quantity: 1,
+    shipping: 15,
+  },
+  {
+    id: 2,
+    brand: "Common Projects",
+    name: "Achilles Retro Low",
+    price: 485,
+    quantity: 1,
+    shipping: 0,
+  },
 ]);
 
-const subtotal = computed(() =>
-    cart.value.reduce((s, i) => s + i.price * i.quantity, 0),
-);
+// Calcul du sous-total
+const subtotal = computed(() => {
+  let sum = 0;
+  cart.value.forEach(item => {
+    sum += item.price * item.quantity;
+  });
+  return sum;
+});
 
-const shipping = computed(() => cart.value.reduce((s, i) => s + i.shipping, 0));
+// Calcul du frais de livraison
+const shipping = computed(() => {
+  let sum = 0;
+  cart.value.forEach(item => {
+    sum += item.shipping;
+  });
+  return sum;
+});
 
-const total = computed(() => subtotal.value + shipping.value);
+// Total général
+const total = computed(() => {
+  return subtotal.value + shipping.value;
+});
 
-const increase = (item) => item.quantity++;
-const decrease = (item) => item.quantity > 1 && item.quantity--;
-const removeItem = (id) => (cart.value = cart.value.filter((i) => i.id !== id));
+// Augmenter la quantité
+function increase(item) {
+  item.quantity++;
+}
+
+// Diminuer la quantité
+function decrease(item) {
+  if (item.quantity > 1) {
+    item.quantity--;
+  }
+}
+
+// Supprimer un produit
+function removeItem(id) {
+  cart.value = cart.value.filter(item => item.id !== id);
+}
 </script>
+
 
 <style scoped>
 .cart-container {
@@ -199,7 +224,7 @@ const removeItem = (id) => (cart.value = cart.value.filter((i) => i.id !== id));
 
 .checkout {
     margin-top: 15px;
-    background: #f5be4b;
+    background: #f5b400;
     color: white;
     padding: 0.4rem 1rem;
     border-radius: 4px;

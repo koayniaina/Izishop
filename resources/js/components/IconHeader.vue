@@ -1,6 +1,6 @@
 <template>
   <div class="icon-header">
-    
+
     <div
       class="addIcon"
       v-for="(item, index) in iconList"
@@ -28,14 +28,14 @@
 </template>
 
 <script setup>
+// import { Link } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
-import { Phone, Heart, User, ShoppingCart } from 'lucide-vue-next';
-
+import { Phone, User, ShoppingCart } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
+// import { route } from 'ziggy-js';
 
 const iconList = [
   { icon: Phone, title: 'contact', value: '(262)555 123 096' },
-//   { icon: Heart, title: 'favorite', value: 'My items' },
   { icon: User, title: 'sign In', value: 'Account', routeName: 'page.login' },
   { icon: ShoppingCart, title: 'cart', value: 'Total', routeName: 'page.cart' },
 ];

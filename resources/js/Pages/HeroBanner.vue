@@ -63,13 +63,13 @@ h1 {
 }
 
 .price span {
-    color: #F5BE4B;
+    color: #f5b400;
     font-weight: bold;
 }
 
 /* BUTTON */
 .btn {
-    background:#F5BE4B;
+    background:#f5b400;
     color: white;
     padding: 0.3rem 1rem;
     border-radius: 4px;
@@ -79,7 +79,7 @@ h1 {
 }
 
 .btn:hover {
-    background: #F5BE4B;
+    background: #f5b400;
 }
 
 /* IMAGE */

@@ -10,7 +10,7 @@
 @source '../**/*.js';
 
 body , html{
-    font-family: 'Montserrat',sans-serif;
+    font-family: 'Poppins',sans-serif;
 }
 
 @theme inline {

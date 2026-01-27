@@ -7,7 +7,7 @@ const mainLinks = [
   { name: 'Home', routeName: 'page.home' },
   { name: 'Product', routeName: 'page.home' },
   { name: 'Blog', routeName: 'page.home' },
-    { name: 'About', routeName: 'page.home' },
+  { name: 'About', routeName: 'page.home' },
 ];
 
 const secondaryLinks = [

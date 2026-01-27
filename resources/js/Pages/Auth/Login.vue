@@ -7,7 +7,7 @@ import { Mail, Lock } from 'lucide-vue-next'
 const form = useForm({
     email: '',
     password: '',
-    remember: false, // ajout du champ Remember Me
+    remember: false,
 })
 
 const submit = () => {

@@ -6,9 +6,9 @@ import TopHeader from "../components/TopHeader.vue";
 <template>
     <main>
         <TopHeader />
-        <sction>
+        <section>
             <slot />
-        </sction>
+        </section>
         <footer>
             <Footer />
         </footer>

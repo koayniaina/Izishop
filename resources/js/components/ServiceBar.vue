@@ -78,7 +78,7 @@ const services = [
 .icon {
   width: 28px;
   height: 28px;
-  color: #F5BE4B;
+  color: #f5b400;
 }
 
 h4 {

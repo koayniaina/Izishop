@@ -41,6 +41,9 @@ import BottonHeader from './BottonHeader.vue';
 
 main{
     background-color: #f5b400;
+    position: sticky;
+    z-index: 20;
+    top: 0;
 }
 
 section{

@@ -1,5 +1,5 @@
 <script setup>
-import { usePage, router } from '@inertiajs/vue3'
+import { usePage, router, Link } from '@inertiajs/vue3'
 import { route } from 'ziggy-js'
 import Index from './Posts/Index.vue'
 
@@ -13,7 +13,7 @@ const logout = () => {
 <template>
   <div class="p-6">
     <h1 class="text-2xl font-bold mb-4">Seller Dashboard</h1>
-
+    <Link :href="route('page.home')">Home Page</Link>
     <p class="mb-6">
       <strong>Name:</strong> {{ auth.user.name }}
     </p>

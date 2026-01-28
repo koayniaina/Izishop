@@ -28,11 +28,10 @@
 </template>
 
 <script setup>
-// import { Link } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
 import { Phone, User, ShoppingCart } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
-// import { route } from 'ziggy-js';
+
 
 const iconList = [
   { icon: Phone, title: 'contact', value: '(262)555 123 096' },
@@ -50,7 +49,7 @@ const iconList = [
 
 .addIcon {
   display: flex;
-  align-items: center; /* icône et texte sur la même ligne */
+  align-items: center;
   gap: 0.5rem;
   cursor: pointer;
 }

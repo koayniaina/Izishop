@@ -52,7 +52,6 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        // Sécurité : rôle par défaut
         $data['role'] = 'user';
 
         $data['password'] = Hash::make($data['password']);

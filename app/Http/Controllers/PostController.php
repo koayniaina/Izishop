@@ -4,99 +4,164 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    // Afficher tous les posts
+    /*
+    |--------------------------------------------------------------------------
+    | Dashboard Seller
+    |--------------------------------------------------------------------------
+    */
+    public function dashboard()
+{
+    return Inertia::render('Seller/Dashboard', [
+        'posts' => Post::where('user_id', Auth::id())->latest()->get(),
+    ]);
+}
+
+    /*
+    |--------------------------------------------------------------------------
+    | Liste des posts du seller
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
-        $posts = Post::get();
-        return Inertia::render('Posts/Index', [
-            'posts' => $posts,
+        return Inertia::render('Seller/Posts/Index', [
+            'posts' => Post::where('user_id', Auth::id())
+                ->latest()
+                ->get(),
         ]);
     }
 
-    // Afficher le formulaire de création
+    /*
+    |--------------------------------------------------------------------------
+    | Formulaire de création
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
-        return Inertia::render('Posts/Create');
+        return Inertia::render('Seller/Posts/Create');
     }
 
-    // Stocker un nouveau post
+    /*
+    |--------------------------------------------------------------------------
+    | Enregistrement
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|max:10240'
+            'title'       => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'price'       => ['required', 'numeric', 'min:0'],
+            'image'       => ['nullable', 'image', 'max:10240'],
         ]);
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('posts', 'public');
         }
 
+        // 🔐 Sécurité : associer le post au seller connecté
+        $validated['user_id'] = Auth::id();
+
         Post::create($validated);
 
-        return redirect()->route('posts.index')->with('success', 'Post créé avec succès !');
+        return redirect()
+            ->route('seller.dashboard')
+            ->with('success', 'Post créé avec succès !');
     }
 
-    // Afficher le formulaire d'édition
-    public function edit(Post $post)
+    /*
+    |--------------------------------------------------------------------------
+    | Affichage d’un post
+    |--------------------------------------------------------------------------
+    */
+    public function show(Post $post)
     {
-        return Inertia::render('Posts/Edit', [
+        $this->authorizePost($post);
+
+        return Inertia::render('Seller/Posts/Show', [
             'post' => $post,
         ]);
     }
 
-    // Mettre à jour un post
-public function update(Request $request, Post $post)
-{
-    $data = $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price' => 'required|numeric|min:0',
-        'image' => 'nullable|image|max:10240'
-    ]);
+    /*
+    |--------------------------------------------------------------------------
+    | Formulaire d’édition
+    |--------------------------------------------------------------------------
+    */
+    public function edit(Post $post)
+    {
+        $this->authorizePost($post);
 
-    if ($request->hasFile('image')) {
-
-        // Supprimer l’ancienne image
-        if ($post->image) {
-            Storage::disk('public')->delete($post->image);
-        }
-
-        // Enregistrer la nouvelle
-        $data['image'] = $request->file('image')->store('posts', 'public');
-
-    } else {
-        unset($data['image']);
+        return Inertia::render('Seller/Posts/Edit', [
+            'post' => $post,
+        ]);
     }
 
-    $post->update($data);
+    /*
+    |--------------------------------------------------------------------------
+    | Mise à jour
+    |--------------------------------------------------------------------------
+    */
+    public function update(Request $request, Post $post)
+    {
+        $this->authorizePost($post);
 
-    return redirect()->route('posts.index')
-        ->with('success', 'Post mis à jour avec succès');
-}
+        $data = $request->validate([
+            'title'       => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'price'       => ['required', 'numeric', 'min:0'],
+            'image'       => ['nullable', 'image', 'max:10240'],
+        ]);
 
-public function show(Post $post)
-{
-    return Inertia::render('Posts/Show', [
-        'post' => $post,
-    ]);
-}
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
 
-    // Supprimer un post
+            $data['image'] = $request->file('image')->store('posts', 'public');
+        }
+
+        $post->update($data);
+
+        return redirect()
+            ->route('seller.dashboard')
+            ->with('success', 'Post mis à jour avec succès');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Suppression
+    |--------------------------------------------------------------------------
+    */
     public function destroy(Post $post)
     {
+        $this->authorizePost($post);
+
         if ($post->image) {
             Storage::disk('public')->delete($post->image);
         }
 
         $post->delete();
 
-        return redirect()->route('posts.index')->with('success', 'Post supprimé avec succès !');
+        return redirect()
+            ->route('seller.dashboard')
+            ->with('success', 'Post supprimé avec succès !');
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Autorisation (sécurité seller)
+    |--------------------------------------------------------------------------
+    */
+    private function authorizePost(Post $post): void
+    {
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'Action non autorisée');
+        }
     }
 }

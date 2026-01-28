@@ -33,10 +33,11 @@
     /* border-radius: 6px; */
     overflow: hidden;
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
+
     background-image:
         linear-gradient(#444444c7, rgba(43, 43, 43, 0.829)),
-        url("/public/casque.jpg");
+        url("https://www.actu-environnement.com/images/illustrations/breve/36058_large.jpg");
 }
 
 /* LEFT CONTENT */

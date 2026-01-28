@@ -16,16 +16,16 @@ import {
 
 // Toutes les catégories
 const categories = [
-  { name: "Flooring", slug: "flooring", icon: Box },
-  { name: "Electrical ", slug: "electrical", icon: Zap },
-  { name: "Hardware ", slug: "hardware", icon: Shield },
-  { name: "Plumbing", slug: "plumbing", icon: Droplet },
-  { name: "Paints", slug: "paint", icon: SprayCan },
-  { name: "Furniture", slug: "furniture", icon: Sofa },
-  { name: "Gardening", slug: "gardening", icon: Leaf },
-  { name: "Roofing", slug: "roofing", icon: Home },
-  { name: "Construction", slug: "machinery", icon: HardHat },
-  { name: "DIY", slug: "diy", icon: Toolbox },
+  { name: "Flooring & Surfaces", slug: "flooring", icon: Box },
+  { name: "Electrical & Lighting ", slug: "electrical", icon: Zap },
+  { name: "Hardware & Safety", slug: "hardware", icon: Shield },
+  { name: "Plumbing & Sanitary", slug: "plumbing", icon: Droplet },
+  { name: "Paints & Sealants", slug: "paint", icon: SprayCan },
+  { name: "Furniture & Interior", slug: "furniture", icon: Sofa },
+  { name: "Gardening & Landscaping", slug: "gardening", icon: Leaf },
+  { name: "Roofing & Waterproofing", slug: "roofing", icon: Home },
+  { name: "Construction Machinery", slug: "machinery", icon: HardHat },
+  { name: "DIY & Miscellaneous", slug: "diy", icon: Toolbox },
 ]
 
 // Ref du conteneur scrollable
@@ -116,22 +116,21 @@ const scrollRight = () => {
   left: 50%;
   transform: translateX(-50%);
 }
-/*
 .category-card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit , minmax(140px , 1fr));
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.3s;
-} */
+}
 
 .icon-wrapper {
-  /* width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #f0f0f0; */
+  width: 140px;
+  height: 50px;
+  /* border-radius: 50%; */
+  /* background: #f0f0f0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +151,7 @@ const scrollRight = () => {
 .category-card p {
   font-weight: 500;
   font-size: 0.7rem;
-  margin-top: .3rem;
+  /* margin-top: .3rem; */
   text-align: center;
   color: #333;
 }

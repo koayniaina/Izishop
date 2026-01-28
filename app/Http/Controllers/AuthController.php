@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -9,41 +10,58 @@ use Inertia\Inertia;
 
 class AuthController extends Controller
 {
-
-    public function register(Request $request)
+    public function showLogin()
     {
-        $validated = $request->validate([
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'min:6', 'confirmed'],
-        ]);
-
-        $validated['password'] = Hash::make($validated['password']);
-
-        $user = User::create($validated);
-
-        Auth::login($user);
-
-        return redirect()->route('page.home');
+        return Inertia::render('Auth/Login');
     }
-
 
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email'    => ['required', 'email'],
+            'password' => ['required', 'string'],
         ]);
 
-        if (! Auth::attempt($credentials, $request->boolean('remember'))) {
+        if (!Auth::attempt($credentials)) {
             return back()->withErrors([
-                'email' => 'Email ou mot de passe incorrect',
+                'email' => 'Email ou mot de passe incorrect.',
             ]);
         }
 
         $request->session()->regenerate();
 
-        return redirect()->route('page.profile');
+        $user = Auth::user();
+
+        return match ($user->role) {
+            'admin'  => redirect()->route('admin.dashboard'),
+            'seller' => redirect()->route('seller.dashboard'),
+            default  => redirect()->route('dashboard'),
+        };
+    }
+
+    public function showRegister()
+    {
+        return Inertia::render('Auth/Register');
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->validate([
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        // Sécurité : rôle par défaut
+        $data['role'] = 'user';
+
+        $data['password'] = Hash::make($data['password']);
+
+        User::create($data);
+
+        return redirect()
+            ->route('page.login')
+            ->with('success', 'Compte créé avec succès. Connectez-vous !');
     }
 
     public function logout(Request $request)
@@ -54,12 +72,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('page.login');
-    }
-
-    public function profile(Request $request)
-    {
-        return Inertia::render('Auth/Profile', [
-            'user' => $request->user(),
-        ]);
     }
 }

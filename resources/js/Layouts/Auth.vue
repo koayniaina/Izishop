@@ -1,56 +1,68 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
+import { ArrowLeft } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
 
 </script>
 
 <template>
-    <div>
-        <Link :href="route('page.home')" class="home">Go Back</Link>
-    </div>
-    <nav>
-        <Link :href="route('page.login')">Login</Link>
-        <Link :href="route('page.register')">Register</Link>
-    </nav>
-    <section>
-        <slot/>
-    </section>
+    <main>
+        <header>
+
+            <nav>
+                <Link :href="route('page.login')">Sign In</Link>
+                <Link :href="route('page.register')">Sign Up</Link>
+            </nav>
+        </header>
+        <section>
+            <slot/>
+        </section>
+    </main>
 </template>
 
 <style scoped>
-    nav{
+    main{
         background-color:#0f172a;
-        padding: 1rem;
+        /* font-weight: .8rem; */
+        min-height: 100vh;
+    }
+
+    header{
         justify-content: center;
         display: flex;
-        gap: 2rem;
+        padding:1rem 2rem;
         color: white;
         position: relative;
-        font-size: 1.2rem;
-        font-weight: 600;
+
     }
 
     section{
         display: flex;
         justify-content: center;
         align-items: center;
-        /* height: 50vh; */
-        border-top: 2px solid #F5BE4B;
+        border-top: 1px solid #283044;
     }
 
-    nav a:hover{
-        color: #F5BE4B;
+    button{
+        display: flex;
+        align-items: center;
+        gap: .2rem;
+        background-color: #283044;
+        padding: .3rem 1rem;
+        border-radius: 5px;
     }
 
-.home{
-    position: absolute;
-    top: 56px;
-    margin: 1rem;
-    padding: .4rem 1rem;
-    font-size: .7rem;
-    color: white;
-    background-color: #000000;
-    border-radius: 4px;
-    /* border: 1px solid #000000; */
-}
+    nav{
+        display: flex;
+        gap: 1rem;
+    }
+
+    nav a{
+        border: 1px solid rgb(75, 75, 75);
+        padding: .3rem 1rem;
+        font-size: .9rem;
+        text-transform: uppercase;
+        border-radius: 5px;
+    }
+
 </style>

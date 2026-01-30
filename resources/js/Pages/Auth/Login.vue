@@ -1,91 +1,132 @@
 <script setup>
-import { Link, useForm } from '@inertiajs/vue3'
-import AuthLayout from '../../Layouts/Auth.vue'
-import { route } from 'ziggy-js'
-import { Mail, Lock } from 'lucide-vue-next'
+import { Link, useForm } from "@inertiajs/vue3";
+import AuthLayout from "../../Layouts/Auth.vue";
+import { route } from "ziggy-js";
+import { Mail, Lock, ArrowLeft } from "lucide-vue-next";
 
 const form = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: false,
-})
+});
 
 const submit = () => {
-    form.post(route('page.login'), {
+    form.post(route("page.login"), {
         onError: () => {
-            form.reset('password')
+            form.reset("password");
         },
-    })
-}
+    });
+};
 </script>
 
 <template>
-<AuthLayout>
-    <div class="auth-card">
+    <AuthLayout>
+        <div class="auth-card">
+            <p class="button">
+                <ArrowLeft :size="15" />
+                <Link :href="route('page.home')" class="home">Go Back</Link>
+            </p>
+            <div class="mb-4">
+                <h2 class="title">Welcom back egain</h2>
+                <p class="text-center text-uppercase text-gray-500">
+                    It's your account
+                </p>
+            </div>
+            <form @submit.prevent="submit">
+                <!-- Email -->
+                <div class="field">
+                    <div
+                        class="input-wrapper"
+                        :class="{ 'error-border': form.errors.email }"
+                    >
+                        <Mail class="icon" />
+                        <input
+                            type="email"
+                            v-model="form.email"
+                            placeholder="Email"
+                        />
+                    </div>
+                    <div v-if="form.errors.email" class="error-message">
+                        {{ form.errors.email }}
+                    </div>
+                </div>
 
-        <div  class="text-center mb-2">
-            <h2 class="title">Welcom back egain</h2>
-            <p>It's your account</p>
+                <!-- Password -->
+                <div class="field">
+                    <div
+                        class="input-wrapper"
+                        :class="{ 'error-border': form.errors.password }"
+                    >
+                        <Lock class="icon" />
+                        <input
+                            type="password"
+                            v-model="form.password"
+                            placeholder="Password"
+                        />
+                    </div>
+                    <div v-if="form.errors.password" class="error-message">
+                        {{ form.errors.password }}
+                    </div>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex justify-between items-center mb-4">
+                    <label
+                        class="flex items-center gap-2 text-sm text-gray-700"
+                    >
+                        <input type="checkbox" v-model="form.remember" />
+                        Remember Me
+                    </label>
+                    <Link href="/forgot-password" class="text-sm">
+                        Forgot Password?
+                    </Link>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn" :disabled="form.processing">
+                    Login
+                </button>
+            </form>
         </div>
-        <form @submit.prevent="submit">
-
-            <!-- Email -->
-            <div class="field">
-                <div class="input-wrapper" :class="{'error-border': form.errors.email}">
-                    <Mail class="icon"/>
-                    <input type="email" v-model="form.email" placeholder="Email" />
-                </div>
-                <div v-if="form.errors.email" class="error-message">
-                    {{ form.errors.email }}
-                </div>
-            </div>
-
-            <!-- Password -->
-            <div class="field">
-                <div class="input-wrapper" :class="{'error-border': form.errors.password}">
-                    <Lock class="icon"/>
-                    <input type="password" v-model="form.password" placeholder="Password" />
-                </div>
-                <div v-if="form.errors.password" class="error-message">
-                    {{ form.errors.password }}
-                </div>
-            </div>
-
-            <!-- Remember Me & Forgot Password -->
-            <div class="flex justify-between items-center mb-4">
-                <label class="flex items-center gap-2 text-sm text-gray-700">
-                    <input type="checkbox" v-model="form.remember" />
-                    Remember Me
-                </label>
-                <Link href="/forgot-password" class="text-sm ">
-                    Forgot Password?
-                </Link>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="submit" class="btn" :disabled="form.processing">
-                Login
-            </button>
-        </form>
-    </div>
-</AuthLayout>
+    </AuthLayout>
 </template>
 
 <style scoped>
-
 .auth-card {
+    position: relative;
     width: 100%;
-    max-width: 450px;
-    margin: 4rem auto;
+    max-width: 550px;
+    background-color: #ffffff;
+    margin: 3rem auto;
+    color: #111827;
+    padding: 2rem;
+    /* border-radius: 5px; */
 }
 
 /* =========================
    Titres
 ========================= */
 .title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: #111827;
+    text-transform: uppercase;
+}
+
+.button{
+    display: flex;
+    /* border: 1px solid black; */
+    gap: .2rem;
+    position: absolute;
+    right: 0;
+    align-items: center;
+    /* padding: .3rem 1rem; */
+    width: 125px;
+    border-radius: 5px;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
 /* =========================
@@ -98,21 +139,11 @@ const submit = () => {
 .input-wrapper {
     display: flex;
     align-items: center;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
+    border: 1px solid #636363;
+    border-radius: 5px;
     padding: 0.45rem 0.75rem;
-    background: #fff;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.input-wrapper:hover {
-    border-color: #F5BE4B;
-    box-shadow: 0 0 0 3px rgba(245, 190, 75, 0.25);
-}
-
-.input-wrapper:focus-within {
-    border-color: #F5BE4B;
-    box-shadow: 0 0 0 3px rgba(245, 190, 75, 0.35);
+    /* background: #fff; */
+    /* transition: border-color 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .input-wrapper input {
@@ -129,9 +160,9 @@ const submit = () => {
    Icônes
 ========================= */
 .icon {
-    width: 20px;
-    height: 20px;
-    color: #9ca3af;
+    width: 18px;
+    height: 18px;
+    color: #000000;
 }
 
 /* =========================
@@ -182,7 +213,7 @@ const submit = () => {
 }
 
 .text-primary {
-    color: #F5BE4B;
+    color: #f5be4b;
 }
 
 .text-primary:hover {
@@ -194,7 +225,7 @@ const submit = () => {
 ========================= */
 .btn {
     width: 100%;
-    background: #F5BE4B;
+    background: #000000;
     color: #ffffff;
     padding: 0.55rem;
     border-radius: 6px;
@@ -202,21 +233,13 @@ const submit = () => {
     cursor: pointer;
     font-weight: 700;
     font-size: 1rem;
-    transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    text-transform: uppercase;
+    /* transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.15s ease; */
 }
 
-.btn:hover:not(:disabled) {
-    background: #e4aa35;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+@media (max-width: 640px) {
+    .field-row {
+        flex-direction: column;
+    }
 }
-
-.btn:active:not(:disabled) {
-    transform: scale(0.97);
-}
-
-.btn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
 </style>

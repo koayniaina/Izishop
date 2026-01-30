@@ -4,9 +4,8 @@ import HeroBanner from './HeroBanner.vue'
 import ServiceBar from '../components/ServiceBar.vue'
 import Posts from './Posts.vue'
 import Category from '../components/Category.vue';
-// import { defineProps } from 'vue'
+import { Mail } from 'lucide-vue-next';
 
-// Props envoyées par Laravel/Inertia
 const props = defineProps<{
   posts: Array<{
     id: number,
@@ -20,9 +19,30 @@ const props = defineProps<{
 
 <template>
   <AppLayout>
-    <HeroBanner />
-    <Category/>
-    <Posts :posts="props.posts"/>
-    <ServiceBar />
+    <div>
+        <HeroBanner />
+        <Category/>
+        <Posts :posts="props.posts"/>
+        <ServiceBar />
+    </div>
+    <main class="message">
+        <Mail />
+    </main>
   </AppLayout>
 </template>
+
+
+<style>
+.message{
+    position:fixed;
+    padding: 1rem;
+    border-radius: 50%;
+    right: 0;
+    bottom: 0;
+    margin: 1rem;
+    color: beige;
+    z-index: 100;
+    cursor: pointer;
+    background-color: #25D366;
+}
+</style>

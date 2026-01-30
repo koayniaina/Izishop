@@ -23,7 +23,7 @@ import BottonHeader from './BottonHeader.vue';
         <div class="search">
           <input type="search" placeholder="Search product" />
           <button class="searchButton">
-            <Search :size="12" color="white" />
+            <Search :size="14" color="white" />
           </button>
         </div>
 
@@ -49,28 +49,27 @@ main{
 section{
     padding: .4rem 2rem;
 }
-/* Conteneur nav */
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(148, 148, 148, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
-/* Logo */
+
 .font-medium {
   font-size: 1.3rem;
 }
 
-/* Partie droite (search + icônes) */
 .allRight {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-/* Barre de recherche */
+
 .search {
   display: flex;
   align-items: center;
@@ -78,28 +77,28 @@ nav {
   border-bottom: 0;
   border-top: 0;
   border-left: 0;
+  /* padding: .2rem; */
   border-radius: 60px;
   overflow: hidden;
   background-color: white;
   width: 500px;
 }
 
-/* Input recherche */
+
 .search input {
   border: none;
   outline: none;
   flex: 1;
-      padding: 0 1rem;
+  padding: 0 1rem;
   font-size: 0.9rem;
 }
 
-/* Bouton icône de recherche */
 .searchButton {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: black;
-  padding: .6rem;
+  padding: .8rem;
   cursor: pointer;
   border: none;
 }

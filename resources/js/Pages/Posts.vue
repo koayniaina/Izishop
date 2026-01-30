@@ -2,6 +2,7 @@
 
 import DrawerLeft from '../components/shadcn/DrawerLeft.vue';
 import { ref } from 'vue';
+// import Tabs from '../components/shadcn/Tabs.vue';
 // import { route } from 'ziggy-js';
 
 const props = defineProps<{
@@ -24,9 +25,9 @@ function toggleDrawer() {
 
 <template>
 
-  <div class="container mx-auto p-6">
+  <div>
 
-    <h1 class="text-3xl font-bold mb-6">All Posts</h1>
+    <h1 class="text mb-4 text-uppercase">Category</h1>
 
     <div v-if="posts.length === 0" class="text-gray-500">
       No posts found.
@@ -36,7 +37,7 @@ function toggleDrawer() {
       <div
         v-for="post in posts"
         :key="post.id"
-        class="border rounded p-4 shadow hover:shadow-lg transition"
+        class="transition"
       >
         <img
           v-if="post.image"
@@ -47,20 +48,8 @@ function toggleDrawer() {
         <div v-else class="w-full h-40 bg-gray-200 flex items-center justify-center rounded mb-3">
           No image
         </div>
-
         <h2 class="text-xl font-semibold">{{ post.title }}</h2>
-        <p class="text-gray-700">{{ post.description }}</p>
-        <!-- <p class="font-bold mt-2">Price: ${{ post.price }}</p> -->
 
-        <!-- Bouton pour ouvrir le Drawer -->
-        <!-- <button
-          class="btn mt-3"
-          @click="toggleDrawer"
-        >
-          View Details
-        </button> -->
-
-        <!-- Drawer -->
         <DrawerLeft v-model:open="isDrawerOpen" :post="post" />
       </div>
     </div>
@@ -75,5 +64,10 @@ function toggleDrawer() {
   background-color: #2563eb;
   text-decoration: none;
   cursor: pointer;
+}
+
+.text-uppercase{
+    text-transform: uppercase;
+    color: gray;
 }
 </style>

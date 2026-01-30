@@ -17,10 +17,7 @@ const logout = () => {
     <p class="mb-6">
       <strong>Name:</strong> {{ auth.user.name }}
     </p>
-
-    <!-- ✅ PASSAGE DE LA PROP -->
     <Index :posts="posts" />
-
     <button
       class="mt-6 px-4 py-2 bg-red-500 text-white rounded"
       @click="logout"

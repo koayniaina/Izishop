@@ -1,3 +1,0 @@
-<template>
-    Vue Brandes
-</template>

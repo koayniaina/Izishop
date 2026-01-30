@@ -3,18 +3,12 @@ import { Link } from '@inertiajs/vue3';
 import { route } from 'ziggy-js';
 import Drawer from './shadcn/Drawer.vue';
 
-const mainLinks = [
-  { name: 'Home', routeName: 'page.home' },
-  { name: 'Product', routeName: 'page.home' },
-  { name: 'Blog', routeName: 'page.home' },
-  { name: 'About', routeName: 'page.home' },
-];
 
 const secondaryLinks = [
-  { name: 'Deal of the Day', routeName: 'page.home' },
-  { name: 'Best Sellers', routeName: 'page.home' },
-   { name: 'Hot Deals', routeName: 'page.home' },
-  { name: 'New Arrival', routeName: 'page.home' },
+  { name: 'Deal of the Day', routeName: 'page.deals' },
+  { name: 'Best Sellers', routeName: 'page.sellers' },
+   { name: 'Hot Deals', routeName: 'page.hotdeals' },
+  { name: 'New Arrival', routeName: 'page.arrival' },
 
 ];
 </script>
@@ -24,15 +18,9 @@ const secondaryLinks = [
     <!-- Header -->
      <div class="section">
          <div class="flex items-center gap-2">
-          <Drawer/>
+          <Drawer class="drawer"/>
            <span>Browser Category</span>
          </div>
-
-         <nav class="NavLink flex gap-4 my-2">
-           <span v-for="link in mainLinks" :key="link.name">
-             <Link :href="route(link.routeName)">{{ link.name }}</Link>
-           </span>
-         </nav>
      </div>
 
     <!-- Menu secondaire -->
@@ -49,6 +37,7 @@ const secondaryLinks = [
 <style scoped>
 .NavLink span {
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .main{
@@ -63,5 +52,14 @@ const secondaryLinks = [
     align-items: center;
     gap: 2rem;
     justify-content: space-between;
+
+
+    span{
+        text-transform: uppercase;
+    }
+}
+
+.drawer{
+    cursor: pointer;
 }
 </style>

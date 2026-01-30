@@ -93,12 +93,27 @@ Route::middleware('auth')->group(function () {
     | Admin
     |--------------------------------------------------------------------------
     */
-    Route::middleware('role:admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])
+  ->prefix('admin')
+  ->group(function () {
 
-        Route::get('/admin', function () {
-            return Inertia::render('Admin/Dashboard');
-        })->name('admin.dashboard');
-    });
+    Route::get('/', fn () =>
+      Inertia::render('Admin/Dashboard')
+    )->name('page.admin');
+
+    Route::get('/users', fn () =>
+      Inertia::render('Admin/User')
+    )->name('page.user');
+
+    Route::get('/products', fn () =>
+      Inertia::render('Admin/Product')
+    )->name('page.product');
+
+    Route::get('/transactions', fn () =>
+      Inertia::render('Admin/Transaction')
+    )->name('page.transaction');
+});
+
 
 
     /*

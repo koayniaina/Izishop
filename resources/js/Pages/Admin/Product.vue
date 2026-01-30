@@ -4,8 +4,8 @@ import LayoutAdmin from '../../Layouts/LayoutAdmin.vue'
 
 <template>
   <LayoutAdmin>
-    <h1 class="dashboard">
-      Admin Dashboard
+    <h1 class="text-2xl font-bold mb-4">
+      Admin product
     </h1>
 
     <p>Bienvenue dans le panneau d’administration iZiShop.</p>
